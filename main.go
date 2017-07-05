@@ -16,12 +16,12 @@ import (
 )
 
 type Config struct {
-	Ovpn      string
-	Cfg       string
-	Pass      string
-	Username  string
-	Password  string
-	SecretKey string
+	Ovpn     string
+	Cfg      string
+	Pass     string
+	Username string
+	Password string
+	Secret   string
 }
 
 var conf Config
@@ -57,7 +57,7 @@ func oneTimePassword(key []byte, value []byte) uint32 {
 }
 
 func googleAuthenticatorCode() (s string) {
-	inputNoSpaces := strings.Replace(conf.SecretKey, " ", "", -1)
+	inputNoSpaces := strings.Replace(conf.Secret, " ", "", -1)
 	inputNoSpacesUpper := strings.ToUpper(inputNoSpaces)
 	key, err := base32.StdEncoding.DecodeString(inputNoSpacesUpper)
 	if err != nil {
