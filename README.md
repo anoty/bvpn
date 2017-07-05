@@ -6,7 +6,7 @@ go get github.com/anoty/bvpn
 ```
 ## 配置
 ```
-ovpn = "openvpn命令行程序路径"
+ovpn = "openvpn命令行程序路径" //windows下请不要把openvpn安装到Program Files目录下，go目前不支持带有空格的路径，1.9版本修复
 cfg = "openvpn配置文件路径"
 pass = "openvpn密码文件路径"
 username = "vpn账户"
