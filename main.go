@@ -89,6 +89,7 @@ func connect() {
 }
 
 func main() {
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	var confPath string
 	flag.StringVar(&confPath, "conf", "", "config path")
 	flag.Parse()
@@ -100,6 +101,9 @@ func main() {
 	}
 	for {
 		resetPassFile(googleAuthenticatorCode())
+		log.Println("pass ok")
+		log.Println("bvpn ok")
 		connect()
+		log.Println("bvpn retry")
 	}
 }
