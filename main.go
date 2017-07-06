@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"crypto/hmac"
 	"crypto/sha1"
 	"encoding/base32"
@@ -82,10 +83,24 @@ func resetPassFile(code string) {
 func connect() {
 	argv := []string{"--config", conf.Cfg, "--connect-retry", "0", "--auth-user-pass", conf.Pass}
 	cmd := exec.Command(conf.Ovpn, argv[0:]...)
-	o, _ := cmd.Output()
-	fmt.Println(string(o))
-	cmd.Start()
-	cmd.Wait()
+	cmd.Stdin = os.Stdin
+	var out bytes.Buffer
+	cmd.Stdout = &out
+	cmd.Stderr = &out
+	go func() {
+		for {
+			l, err := out.ReadString('\n')
+			if err != nil {
+				log.Print(err)
+				time.Sleep(100 * time.Millisecond)
+				continue
+			}
+			fmt.Print(l)
+			time.Sleep(100 * time.Millisecond)
+			//cmd.Process.Kill()
+		}
+	}()
+	cmd.Run()
 }
 
 func main() {
