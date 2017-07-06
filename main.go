@@ -90,7 +90,7 @@ func connect() {
 	go func() {
 		for {
 			l, err := out.ReadString('\n')
-			if err != nil {
+			if err != nil && err.Error() != "EOF" {
 				log.Print(err)
 				time.Sleep(100 * time.Millisecond)
 				continue
