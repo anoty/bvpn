@@ -97,6 +97,7 @@ func connect() {
 			}
 			fmt.Print(l)
 			time.Sleep(100 * time.Millisecond)
+			//todo 根据进程消息检测到掉线自动kill进程重启
 			//cmd.Process.Kill()
 		}
 	}()
@@ -116,9 +117,7 @@ func main() {
 	}
 	for {
 		resetPassFile(googleAuthenticatorCode())
-		log.Println("pass ok")
-		log.Println("bvpn ok")
 		connect()
-		log.Println("bvpn retry")
+		time.Sleep(200 * time.Millisecond)
 	}
 }
