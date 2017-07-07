@@ -14,7 +14,7 @@ password="vpn密码"
 secret = "google 验证码 secret，不是手机上的那6个数字，是在第一次初始化 google 验证码的时候二维码对应的 secret"
 ```
 ## 使用
-bvpn需要管理员权限，觉得好用别忘了给个star。
+bvpn需要管理员权限
 ```
 bvpn -conf=bvpn.toml
 ```
